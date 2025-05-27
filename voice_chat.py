@@ -47,6 +47,7 @@ CONFIG = types.LiveConnectConfig(
     response_modalities=[
         "AUDIO",
     ],
+    enable_affective_dialog=True,  # 感情分析を有効にする
     media_resolution="MEDIA_RESOLUTION_MEDIUM",
     speech_config=types.SpeechConfig(
         voice_config=types.VoiceConfig(
