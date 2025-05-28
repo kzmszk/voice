@@ -42,16 +42,23 @@ client = genai.Client(
     api_key=os.environ.get("GEMINI_API_KEY"),
 )
 
+# @param ["Aoede", "Puck", "Charon", "Kore", "Fenrir", "Leda", "Orus", "Zephyr"]
+
+#voice_name = "Kore" # 女。ちょっときつい
+#voice_name = "Fenrir" # 男。若いかんじ
+# voice_name = "Orus" # 男。若いかんじ
+voice_name = "Aoede"  # 女。
+# voice_name = "Zephyr" # 女。若いかんじ
+# voice_name = "Leda" # 女。若いかんじ
 
 CONFIG = types.LiveConnectConfig(
     response_modalities=[
         "AUDIO",
     ],
-    enable_affective_dialog=True,  # 感情分析を有効にする
     media_resolution="MEDIA_RESOLUTION_MEDIUM",
     speech_config=types.SpeechConfig(
         voice_config=types.VoiceConfig(
-            prebuilt_voice_config=types.PrebuiltVoiceConfig(voice_name="Leda")
+            prebuilt_voice_config=types.PrebuiltVoiceConfig(voice_name=voice_name)
         )
     ),
     realtime_input_config=types.RealtimeInputConfig(turn_coverage="TURN_INCLUDES_ALL_INPUT"),

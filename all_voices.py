@@ -15,6 +15,8 @@ def save_binary_file(file_name: str, data: bytes):
 
 
 def generate():
+    kazu_voice = "Charon"
+    ai_voice = "Sulafat"
     client = genai.Client(
         api_key=os.environ.get("GEMINI_API_KEY"),
     )
@@ -24,9 +26,9 @@ def generate():
         types.Content(
             role="user",
             parts=[
-                types.Part.from_text(text="""リラックスしたかんじでゆっくり話します。
-kazu: こんにちは！今日は生成AIについて説明します。
-AI: アイです。今日（きょう）はよろしくおねがいします。どんな話をしてくれるんですか？"""),
+                types.Part.from_text(text="""リラックスして落ち着いた感じのポッドキャストスタイルで話ます。
+kazu: こんにちは！フチコマポッドキャストのカズです。今日はちょっと危険な話をします。
+AI: アイです。えー、やです。冗談ですけど、まあ、今日はよろしくおねがいします。"""),
             ],
         ),
     ]
@@ -42,7 +44,7 @@ AI: アイです。今日（きょう）はよろしくおねがいします。�
                         speaker="kazu",
                         voice_config=types.VoiceConfig(
                             prebuilt_voice_config=types.PrebuiltVoiceConfig(
-                                voice_name="Enceladus"
+                                voice_name=kazu_voice
                             )
                         ),
                     ),
@@ -50,7 +52,7 @@ AI: アイです。今日（きょう）はよろしくおねがいします。�
                         speaker="AI",
                         voice_config=types.VoiceConfig(
                             prebuilt_voice_config=types.PrebuiltVoiceConfig(
-                                voice_name="Sulafat"
+                                voice_name=ai_voice
                             )
                         ),
                     ),
@@ -72,7 +74,7 @@ AI: アイです。今日（きょう）はよろしくおねがいします。�
         ):
             continue
         if chunk.candidates[0].content.parts[0].inline_data and chunk.candidates[0].content.parts[0].inline_data.data:
-            file_name = f"ENTER_FILE_NAME_{file_index}"
+            file_name = f"{kazu_voice}_{ai_voice}_{file_index}"
             file_index += 1
             inline_data = chunk.candidates[0].content.parts[0].inline_data
             data_buffer = inline_data.data
